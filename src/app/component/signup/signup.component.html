@@ -1,0 +1,120 @@
+<div class="form-container mat-elevation-z5">
+  <h1>Create A New Account!</h1>
+  <form [formGroup]="signUpForm">
+    <div class="center margin-top">
+      <div *ngIf="check">
+        <video
+          style="margin-left: 280px"
+          [class.show]="!isCaptured"
+          [class.hide]="isCaptured"
+          #video
+          id="video"
+          [width]="WIDTH"
+          [height]="HEIGHT"
+          autoplay
+        ></video>
+      </div>
+      <canvas
+        [class.show]="isCaptured"
+        [class.hide]="!isCaptured"
+        #canvas
+        id="canvas"
+        [width]="WIDTH"
+        [height]="HEIGHT"
+      ></canvas>
+
+      <div class="center margin-top">
+      <button
+        style="right: 290px; margin-top: 150px"
+        type="submit"
+        mat-raised-button
+        color="primary"
+        *ngIf="!isCaptured"
+        (click)="capture()"
+      >
+        Take Selfie
+        <span class="material-icons"> camera_alt </span>
+      </button>
+      </div>
+      <!-- <button
+            style="  left: 100px;  margin-left: 121px;"
+            type="submit"
+            mat-raised-button
+            color="primary"
+            
+          >
+            Upload
+          </button> -->
+    </div>
+    <div class="center margin-top">
+      <button
+      type="button"
+      formControlName="selfie"
+        style="left: 1px; width: 130px; margin-top: 20px; top: -20px"
+        mat-raised-button
+        color="primary"
+        *ngIf="isCaptured"
+      >
+        Upload
+        <span class="material-icons">file_upload</span>
+      </button>
+    </div>
+
+    <mat-form-field>
+      <input matInput placeholder="Name" formControlName="name" type="" />
+      <mat-error *ngIf="name?.errors?.['required']"> Name is required </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Email" formControlName="email"/>
+      <mat-error *ngIf="email?.errors?.['required']">
+              Email is required
+            </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Aadhar Number" type="number" formControlName="aadharno"/>
+      <mat-error *ngIf="aadharno?.errors?.['required']"> Aadhar Number is required </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Date Of Birth" type="date" formControlName="dob" />
+      <mat-error *ngIf="dob?.errors?.['required']"> Date Of Birth is required </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Address"  formControlName="address" />
+      <mat-error *ngIf="address?.errors?.['required']"> Address is required </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Pan Number" type="pannumber" formControlName="pannumber" />
+      <mat-error *ngIf="pannumber?.errors?.['required']"> PAN Number is required </mat-error>
+    </mat-form-field>
+
+    <!-- <div class="center margin-top ">
+            <button 
+              type="submit"
+              mat-raised-button
+              color="primary"
+              
+            >
+              Upload
+            </button>
+          </div> -->
+    <div>
+      <span class="btn btn-sucess btn-file m-5">Upload Aadhar</span>
+      <input type="file" placeholder="avatar" formControlName="avatar"  (change)="selectFiles($event)"/>
+      <mat-error *ngIf="avatar?.errors?.['required']">
+              Aadhar is required
+            </mat-error>
+    </div>
+
+    <div class="center margin-top">
+      <button
+        style="right: 30px; width: 70px"
+        type="submit"
+        mat-raised-button
+        color="primary"
+      >
+        Verify
+      </button>
+      <button type="submit" mat-raised-button color="primary" (click)="onSubmit()">Submit</button>
+    </div>
+  </form>
+</div>
